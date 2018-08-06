@@ -1,0 +1,83 @@
+<!-- Title & Searchbox-->
+<header class="container default-padding">
+  <form [formGroup]="searchForm">
+    <div class="row">
+      <div class="col-8 offset-2 text-center">
+        <h4>Application</h4>
+        <div class="row">
+          <div class="col-8 offset-2">
+            <div class="form-group">
+              <input
+                type="text"
+                placeholder="Search"
+                name="name" 
+                formControlName="name"
+                class="searchfield form-control text-center"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="row">
+      <div class="col-4 offset-2 dropdown">
+        <select name="country" 
+                formControlName="country"
+                class="form-control form-control-sm">
+          <option>All</option>        
+          <option>AU</option>
+          <option>BR</option>
+          <option>CA</option>
+          <option>CH</option>
+          <option>DE</option>
+          <option>DK</option>
+          <option>ES</option>
+          <option>FI</option>
+          <option>FR</option>
+          <option>GB</option>
+          <option>IE</option>
+          <option>IR</option>
+          <option>NO</option>
+          <option>NL</option>
+          <option>NZ</option>
+          <option>TR</option>
+          <option>US</option>
+        </select>
+      </div>
+      <div class="col-4 dropdown">
+          <select name="gender" 
+                  formControlName="gender"
+                  class="form-control form-control-sm">
+          <option>All</option>
+          <option>male</option>
+          <option>female</option>
+        </select>
+      </div>
+    </div>
+  </form>  
+</header>
+
+<!-- Main -->
+<main class="main default-padding">
+  <div class="container">
+
+    <div class="text-center" *ngIf="(loading | async)">
+      Loading...
+    </div>
+
+    <div class="article" *ngFor="let user of (data | async)">
+      <h4>{{ user.name.title }}  {{user.name.first}} {{user.name.last}}</h4>
+      <p>{{ user.location.street }} {{ user.location.city }} {{ user.location.state }} {{ user.location.postcode }}</p>
+      <p>{{ user.nat }} - {{ user.gender }}</p>
+    </div>
+
+    <div class="article" *ngFor="let user of (users | async)">
+      <h4>{{ user.name.title }}  {{user.name.first}} {{user.name.last}}</h4>
+      <p>{{ user.location.street }} {{ user.location.city }} {{ user.location.state }} {{ user.location.postcode }}</p>
+      <p>{{ user.nat }} - {{ user.gender }}</p>
+    </div>
+
+  </div>
+</main>
